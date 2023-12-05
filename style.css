@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:300");
+  @import url("https://fonts.googleapis.com/css?family=Roboto:300");
 
 .container{
   font-family: "Roboto", sans-serif;
@@ -55,10 +55,19 @@ input::placeholder{
   border-radius: 10px;
   margin: 20px auto;
 }
-
+.productSection::-webkit-scrollbar {
+  width: 6px; 
+  height: 14px;
+}
+.productSection::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 3px; 
+}
+.productSection::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
 
 .productList{
-  /* border: 10px solid black; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,26 +127,98 @@ input::placeholder{
   text-align: left;
   padding-left: 40px;
   margin: 4px;
-  
   height: 40px;
   width: 330px;
   line-height: 40px;
   color:#4D4D4D;
   border-radius: 5px;
-  
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.productGridItem {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px;
+  height: 376px;
+  width: 240px;
+  border: 1px solid #E4E4E4;
+  border-radius: 2px;
+  box-shadow: #f8f8f8;
+  margin: 10px auto;
+  background-color: #F9F9F9;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.productGridImage{
+  position: relative;
+}
+.productGridImage img{
+  width: 215px;
+  height: 206px;
+  border-radius: 5px;
+}
+.productGridImage p{
+  background-color:#CCFF78 ;
+  position: absolute;
+  top: -16px;
+  right: -20px;
+  height: 30px;
+  width: 140px;
+  border: 0px solid;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px 0px 0px 10px;
+  line-height: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productGridInfoTitle{
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24.2px;
+  text-transform: uppercase;
 }
 
 
 
+.productVariants p{
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14.52px;
+  letter-spacing: 15%;
+  text-align: left;
+  padding-left: 40px;
+  margin: 4px;
+  height: 40px;
+  width: 330px;
+  line-height: 40px;
+  color:#4D4D4D;
+  border-radius: 5px;
+}
 
-
-
-
-
-
-
-
-
-
-
+.productGridVariants p{
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14.52px;
+  letter-spacing: 15%;
+  text-align: left;
+  padding: 2px;
+  margin: 4px;
+  height: 26px;
+  width: 226px;
+  line-height: 26px;
+  color:#4D4D4D;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+}
 

@@ -8,13 +8,13 @@
     const gridView  = document.getElementById('gridView');
     const productSection = document.querySelector('.productSection');
     const productList = document.querySelector('.productList');
-
+    const productGrid = document.querySelector('.productGrid');
 
 
     //highlight variants matching search key
     const highlight = async(event)=>{
         searchTerm = event.target.value;
-        console.log(event.target.value);
+        //re-render the products component
         await displayProducts();
     }
 
@@ -39,8 +39,9 @@
 
     //dislay products in a list view
     const displayList = (productData)=>{
+        productGrid.innerHTML = '';
         productList.innerHTML = '';
-        
+
         productData.map((product)=>{
             let productListItem = document.createElement('div');
             productListItem.classList.add('productListItem');
@@ -48,7 +49,7 @@
             productListItem.innerHTML = `
                 <div class='productImage'>
                     <img src='${product.product_image}' alt="">
-                    <p class="productTitle">${product.product_badge}</p>
+                    <p >${product.product_badge}</p>
                 </div>
                 <div class = 'productInfo'>
                     <p class="productInfoTitle">${product.product_title}</p>
@@ -76,8 +77,41 @@
 
     //dispaly products in a grid view
     const displayGrid = (productData)=>{
+        productList.innerHTML = '';
+        productGrid.innerHTML = '';
+        productData.map((product)=>{
+            let productGridItem = document.createElement('div');
+            productGridItem.classList.add('productGridItem');
 
+            productGridItem.innerHTML = `
+                <div class='productGridImage'>
+                    <img src='${product.product_image}' alt="">
+                    <p>${product.product_badge}</p>
+                </div>
+                <div class = 'productGridInfo'>
+                <p class="productGridInfoTitle">${product.product_title}</p>
+                <div class='productGridVariants'>
+                    ${product.product_variants.map(variant => {
+                        const variantText = variant.v1 || variant.v2 || variant.v3;
+                        let backgroundColor =''
+                        if(searchTerm.length > 0){
+                            backgroundColor = variantText.toLowerCase().includes(searchTerm.toLowerCase()) ? '#CCFF78 ' : '';
+                        }
+                        return `<p style="background-color: ${backgroundColor};">${variantText}</p>`;
+            
+                    }).join('')}
+                </div>
+        
+            </div>
+           
+        `;
+
+            productGrid.appendChild(productGridItem)
+
+        });
     }
+
+
 
 
     //for rendering the products, depending on view, using IIFE
