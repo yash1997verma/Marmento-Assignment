@@ -44,62 +44,100 @@ input::placeholder{
 
 /* product list */
 
-.productList{
+.productSection{
+  position: fixed;
+  left: 0;
+  right: 0;
   width: 630px;
-  height: 1422px;
+  height: 580px;
+  overflow-y: scroll;
   border: 1px solid black;
   border-radius: 10px;
   margin: 20px auto;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-}
-body {
+.productList{
+  /* border: 10px solid black; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background: linear-gradient(to right bottom, #873572, black);
-}
-a {
-  display: inline-block;
-  color: lightgrey;
-  font-size: 16px;
-  font-family: "Roboto", sans-serif;
-  white-space: nowrap;
-  padding: 12px;
-  border: 1px solid white;
-  border-radius: 30px;
-  text-decoration: none;
-  transition: all 0.15s ease-in-out;
+  padding:  10px;
 }
 
-a:hover {
-  background: rgba(0, 0, 0, 0.23);
-  color: white;
-  transform: scale(1.03);
-  text-decoration: none;
+.productListItem{
+  display: flex;
+  padding: 20px;
+  height: 215px;
+  width: 90% ;
+  border: 1px solid #E4E4E4;
+  border-radius: 2px;
+  box-shadow: #f8f8f8;
+  margin: 10px auto;
 }
-a:active {
-  transform: scale(0.98);
-} */
+
+.productImage  {
+  position: relative;
+  overflow: hidden;
+}
+.productImage img{
+  height: 175px;
+  width: 175px;
+  border-radius: 5px;
+}
+.productImage p{
+  background-color:#CCFF78 ;
+  position: absolute;
+  top: -16px;
+  left: -2px;
+  height: 30px;
+  width: 102px;
+  border: 0px solid;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  line-height: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.productInfoTitle{
+  margin-left: 30px;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 30.2px;
+  text-transform: uppercase;
+}
+
+.productVariants p{
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14.52px;
+  letter-spacing: 15%;
+  text-align: left;
+  padding-left: 40px;
+  margin: 4px;
+  
+  height: 40px;
+  width: 330px;
+  line-height: 40px;
+  color:#4D4D4D;
+  border-radius: 5px;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

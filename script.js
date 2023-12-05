@@ -1,31 +1,103 @@
-//holds the current view state, by default list view
-let view = 'list';
-
-//select components
-const searchBox = document.querySelector('.productSearch input');
-const listView = document.getElementById('listView');
-const gridView  = document.getElementById('gridView');
-
-
-//highlight variants matching search key
-const highlight = (event)=>{
-    // console.log('hello')
-    console.log(event.target.value);
-}
-
-//add event listners
-searchBox.addEventListener('keyup', highlight);
+(async ()=>{
+    //holds the current view state, by default list view
+    let view = 'list';
+    let searchTerm= '';
+    //select components
+    const searchBox = document.querySelector('.productSearch input');
+    const listView = document.getElementById('listView');
+    const gridView  = document.getElementById('gridView');
+    const productSection = document.querySelector('.productSection');
+    const productList = document.querySelector('.productList');
 
 
 
-const getData = async()=>{
-    const res = await fetch('https://mocki.io/v1/0934df88-6bf7-41fd-9e59-4fb7b8758093');
-    const productData = await res.json();
-    // console.log(productData.data);
-    return productData.data;
-}
+    //highlight variants matching search key
+    const highlight = async(event)=>{
+        searchTerm = event.target.value;
+        console.log(event.target.value);
+        await displayProducts();
+    }
+
+    //change product view
+    const changeView = (currView)=>{
+        view = currView;
+    }
 
 
-getData();
+    //fetch api endpoint
+    const getData = async()=>{
+        try{
+            const res = await fetch('https://mocki.io/v1/0934df88-6bf7-41fd-9e59-4fb7b8758093');
+            const resData = await res.json();
+            const productData = resData.data;
+            return productData;
+        }catch(err){
+            console.log(err);
+            return [];
+        }
+    }
+
+    //dislay products in a list view
+    const displayList = (productData)=>{
+        productList.innerHTML = '';
+        
+        productData.map((product)=>{
+            let productListItem = document.createElement('div');
+            productListItem.classList.add('productListItem');
+
+            productListItem.innerHTML = `
+                <div class='productImage'>
+                    <img src='${product.product_image}' alt="">
+                    <p class="productTitle">${product.product_badge}</p>
+                </div>
+                <div class = 'productInfo'>
+                    <p class="productInfoTitle">${product.product_title}</p>
+                    <div class='productVariants'>
+                    ${product.product_variants.map(variant => {
+                        const variantText = variant.v1 || variant.v2 || variant.v3;
+                        let backgroundColor =''
+                        if(searchTerm.length > 0){
+                            backgroundColor = variantText.toLowerCase().includes(searchTerm.toLowerCase()) ? '#CCFF78 ' : '';
+                        }
+                        return `<p style="background-color: ${backgroundColor};">${variantText}</p>`;
+
+                    }).join('')}
+                    </div>
+
+                </div>
+            `;
+
+            productList.appendChild(productListItem)
+
+        });
+
+        
+    }
+
+    //dispaly products in a grid view
+    const displayGrid = (productData)=>{
+
+    }
 
 
+    //for rendering the products, depending on view, using IIFE
+    const displayProducts = async ()=>{
+        const productData = await getData();
+        //render products according to which view is selected
+        view === 'list' ? displayList(productData) : displayGrid(productData);
+
+    };
+    await displayProducts();
+
+
+    //add event listners
+    searchBox.addEventListener('keyup', highlight);
+    listView.addEventListener('click',async()=>{
+        changeView(listView.getAttribute('data-view'));
+        await displayProducts();
+    });
+    gridView.addEventListener('click',async()=>{
+        changeView(gridView.getAttribute('data-view'));
+        await displayProducts();
+    });
+})();
